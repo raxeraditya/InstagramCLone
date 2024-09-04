@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Specifies ECMAScript target version
+    "module": "ESNext", // Module code generation: CommonJS for Node.js
+    "moduleResolution": "node",
+    "rootDir": "./src", // Specify the root directory of input files
+    "outDir": "./dist", // Redirect output structure to the directory
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Allows default imports from modules with no default export
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true // Disallow inconsistently-cased references
+  },
+  "include": ["src"], // Specifies files/directories to be included
+  "exclude": ["node_modules"] // Specifies files/directories to be excluded
+}
