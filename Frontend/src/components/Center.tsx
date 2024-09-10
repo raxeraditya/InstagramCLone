@@ -1,6 +1,6 @@
 const Center = () => {
   return (
-    <div className="w-[60%]">
+    <div className="sm:w-[60%] w-full">
       {/* Main Content */}
       <h2 className="font-bold text-lg mb-4">Main Feed</h2>
       <div className="grid grid-cols-1 gap-4">

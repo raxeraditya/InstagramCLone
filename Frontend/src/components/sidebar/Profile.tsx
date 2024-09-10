@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
-    <div>
-      <div className="sub-section">
-        <div className="profile-img">
-          <FaUserCheck size={25} />
-        </div>
-        <Link to={"/"} className="sidebar-link">
-          Profile
-        </Link>
+    <div className="flex py-5 px-3 my-0 lg:my-3 lg:gap-4 lg:py-2 lg:pl-3 lg:rounded-md items-center hover:bg-gray-700 cursor-pointer">
+      <div className="">
+        <FaUserCheck size={25} className="" />
       </div>
+      <Link to={"/"} className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block">
+        Profile
+      </Link>
     </div>
   );
 };

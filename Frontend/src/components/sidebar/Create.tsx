@@ -1,17 +1,16 @@
-import { IoMdAdd } from "react-icons/io";
+import { CiSquarePlus } from "react-icons/ci";
+
 import { Link } from "react-router-dom";
 
 const Create = () => {
   return (
-    <div>
-      <div className="sub-section" id="hidden1">
-        <div className="create sidebar-logo">
-          <IoMdAdd size={25} />
-        </div>
-        <Link to={"/"} className="sidebar-link">
-          Create
-        </Link>
+    <div className="flex py-5 px-3 my-0 lg:my-3 lg:gap-4 lg:py-2 lg:pl-3 lg:rounded-md items-center hover:bg-gray-700 cursor-pointer">
+      <div className="">
+        <CiSquarePlus size={25} className="" />
       </div>
+      <Link to={"/"} className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block">
+        Home
+      </Link>
     </div>
   );
 };

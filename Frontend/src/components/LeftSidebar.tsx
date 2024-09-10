@@ -1,5 +1,5 @@
 import Explore from "./sidebar/Explore";
-import Home from "./sidebar/Home";
+import { Home } from "./sidebar/Home";
 import Logo from "./sidebar/Logo";
 import Messages from "./sidebar/Messages";
 import More from "./sidebar/More";
@@ -10,7 +10,7 @@ import Search from "./sidebar/Search";
 
 const LeftSidebar = () => {
   return (
-    <div className="flex flex-col items-center md:items-start justify-between h-full pt-2 pb-5 w-full px-4 md:w-9">
+    <div className="flex flex-col items-start justify-between h-full pt-2 pb-5 lg:px-4 lg:w-[80%]">
       <div>
         <Logo />
         <Home />
