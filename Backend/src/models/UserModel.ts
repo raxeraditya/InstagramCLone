@@ -1,32 +1,63 @@
-import { Schema, model, Types, Document } from 'mongoose';
+import { Schema, model, Types, Document } from "mongoose";
 
-// Interface for the User document
 interface IUser extends Document {
   username: string;
   email: string;
   password: string;
+  avatar?: string;
   bio?: string;
-  profilePicture?: string;
-  followers: Types.ObjectId[];
-  following: Types.ObjectId[];
-  posts: Types.ObjectId[];
+  followers?: Types.ObjectId[];
+  following?: Types.ObjectId[];
+  posts?: Types.ObjectId[];
 }
-
-// User Schema
 const userSchema = new Schema<IUser>(
   {
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    bio: { type: String },
-    profilePicture: { type: String },
-    followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+    username: {
+      type: String,
+      required: [true, "Username is required"],
+      unique: true,
+      trim: true,
+      minlength: [3, "Username must be at least 3 characters long"],
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+      minlength: [6, "Password must be at least 6 characters long"],
+      select: false, // Don't include password in queries by default
+    },
+    avatar: {
+      type: String,
+      default: "default-avatar.png",
+    },
+    followers: {
+      type: [Types.ObjectId],
+      ref: "User",
+    },
+    following: {
+      type: [Types.ObjectId],
+      ref: "User",
+    },
+    posts: {
+      type: [Types.ObjectId],
+      ref: "Post",
+    },
+    bio: {
+      type: String,
+      maxlength: [200, "Bio cannot exceed 200 characters"],
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-const User = model<IUser>('User', userSchema);
+const User = model<IUser>("User", userSchema);
 
 export default User;

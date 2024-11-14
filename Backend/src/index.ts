@@ -1,9 +1,10 @@
 import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
-import userRoutes from "./routes/Routes.js";
+import updateUserRoutes from "./routes/update.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
-import cors from "cors"
-
+import cors from "cors";
+import connectDb from "./Utils/db.js";
 
 dotenv.config();
 const port = process.env.PORT || 4000;
@@ -22,8 +23,10 @@ app.get("/", (req: Request, res: Response) => {
   res.send("hey");
 });
 
-app.use("/api", userRoutes);
+app.use("/api/v1", userRoutes);
+app.use("/api/v2", updateUserRoutes);
 
 app.listen(port, () => {
+  connectDb();
   console.log(`Example app listening on port ${port}`);
 });
