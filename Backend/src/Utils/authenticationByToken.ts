@@ -12,7 +12,10 @@ export const isAuthenticated = (
   try {
     const token = req.cookies.token;
     const authHeader = req.headers.authorization;
-    console.log("authheader .................", authHeader);
+    console.log(
+      "authheader ................. req.headers.authorization",
+      authHeader
+    );
     if (!token) {
       return res
         .status(400)

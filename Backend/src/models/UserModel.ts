@@ -9,6 +9,7 @@ interface IUser extends Document {
   followers?: Types.ObjectId[];
   following?: Types.ObjectId[];
   posts?: Types.ObjectId[];
+  likes?: Types.ObjectId[];
 }
 const userSchema = new Schema<IUser>(
   {
@@ -51,6 +52,10 @@ const userSchema = new Schema<IUser>(
     bio: {
       type: String,
       maxlength: [200, "Bio cannot exceed 200 characters"],
+    },
+    likes: {
+      type: [Types.ObjectId],
+      ref: "User",
     },
   },
   {

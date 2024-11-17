@@ -8,27 +8,22 @@ export const addComment = async (req: AuthRequest, res: Response) => {
   try {
     const postId = req.params.id;
     // const commentKrneWalaUserKiId = req.id;
-
-    const { text, commentUserId } = await req.body;
+    const { comment } = await req.body;
     const post = await Post.findById(postId);
-    console.log(post, text, commentUserId);
-    if (!text)
+    if (!comment)
       return res
         .status(400)
-        .json({ message: "text is required", success: false });
-
-    const comment = await Comment.create({
-      user: commentUserId,
+        .json({ message: "comment is required", success: false });
+    const CommentInDb = await Comment.create({
+      user: req.id,
       post: postId,
-      content: text,
+      content: comment,
     });
-
-    post?.comments?.push(comment._id as mongoose.Types.ObjectId);
+    post?.comments?.push(CommentInDb._id as mongoose.Types.ObjectId);
     await post?.save();
-
     return res.status(201).json({
       message: "Comment Added",
-      comment,
+      CommentInDb,
       success: true,
     });
   } catch (error) {
@@ -43,12 +38,12 @@ export const addComment = async (req: AuthRequest, res: Response) => {
 export const addPost = async (req: AuthRequest, res: Response) => {
   try {
     const body = await req.body;
-    const { author, caption } = body;
-    if (!author || !caption) {
+    const { caption } = body;
+    if (!caption) {
       return res.status(400).json({ message: "please fill sufficient data" });
     }
     const post = await Post.create({
-      author: author,
+      author: req.id,
       caption: caption,
     });
     return res

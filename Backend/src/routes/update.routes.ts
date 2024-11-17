@@ -8,8 +8,8 @@ import {
 } from "../controllers/updateUserController.js";
 import { isAuthenticated } from "../Utils/authenticationByToken.js";
 
-router.get("/updateusername/:id", isAuthenticated, updateUserByUsername); // complete
-router.get("/updateemail/:id", isAuthenticated, updateUserByEmail); // complete
-router.get("/updatepassword/:id", isAuthenticated, updateUserByPassword); // complete
+router.get("/updateusername", isAuthenticated, updateUserByUsername); // complete
+router.get("/updateemail", isAuthenticated, updateUserByEmail); // complete
+router.get("/updatepassword", isAuthenticated, updateUserByPassword); // complete
 
 export default router;
