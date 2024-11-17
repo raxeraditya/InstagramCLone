@@ -10,6 +10,7 @@ interface IUser extends Document {
   following?: Types.ObjectId[];
   posts?: Types.ObjectId[];
   likes?: Types.ObjectId[];
+  saves?: Types.ObjectId[];
 }
 const userSchema = new Schema<IUser>(
   {
@@ -56,6 +57,10 @@ const userSchema = new Schema<IUser>(
     likes: {
       type: [Types.ObjectId],
       ref: "User",
+    },
+    saves: {
+      type: [Types.ObjectId],
+      ref: "Post",
     },
   },
   {

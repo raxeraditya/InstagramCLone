@@ -3,6 +3,7 @@ import Jwt, { JwtPayload } from "jsonwebtoken";
 import { AuthRequest } from "../types/postTypes.js";
 import { tokenType } from "../types/userTypes.js";
 import { NextFunction, Response } from "express";
+import mongoose from "mongoose";
 
 export const isAuthenticated = (
   req: AuthRequest,
@@ -30,8 +31,8 @@ export const isAuthenticated = (
         .status(400)
         .json({ message: "your token is compromised", error: decodedData });
     }
-    const userid = String(decodedData.userid);
-    req.id = userid;
+    const userId = decodedData.userid;
+    req.id = userId;
     next();
   } catch (error) {
     console.log(error);

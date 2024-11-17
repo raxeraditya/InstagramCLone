@@ -38,7 +38,7 @@ export const createUser = async (req: AuthRequest, res: Response) => {
     const newUser = new User({ username, email, password });
     const savedUser = await newUser.save();
     const tokendata: tokenType = {
-      userid: savedUser._id as mongoose.Schema.Types.ObjectId,
+      userid: savedUser._id as mongoose.Types.ObjectId,
       username: savedUser.username,
       email: savedUser.email,
     };
@@ -76,7 +76,7 @@ export const loginUser = async (req: AuthRequest, res: Response) => {
       return res.status(400).json({ message: "your password incorrect" });
     }
     const tokendata: tokenType = {
-      userid: userFind._id as mongoose.Schema.Types.ObjectId,
+      userid: userFind._id as mongoose.Types.ObjectId,
       username: userFind.username,
       email: userFind.email,
     };
@@ -137,65 +137,10 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
     }
     const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
-      return res.status(404).json({ message: "User not found", data: {} });
+      return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server Error", error: err });
-  }
-};
-// Likes a post
-export const likeUserPost = async (req: AuthRequest, res: Response) => {
-  try {
-    const postId = req.params.id;
-    const userId = req.id;
-    const post = await Post.findById(postId);
-    if (!post) {
-      return res.status(400).json({ message: "post does not exists" });
-    }
-    const likePost = await post.updateOne({ $addToSet: { likes: userId } });
-    await post.save();
-    const addPostIdInUserLike = await User.findByIdAndUpdate(
-      userId,
-      { $addToSet: { likes: post._id } }, // $addToSet ensures no duplicates
-      { new: true }
-    ).lean();
-    if (!likePost || !addPostIdInUserLike) {
-      return res.status(400).json({ message: "Some error to Like this Post" });
-    }
-    return res
-      .status(200)
-      .json({ message: "succes to like post", data: addPostIdInUserLike });
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ message: "Internal Server Error", error: error });
-  }
-};
-// DislikePost
-export const dislikeUserPost = async (req: AuthRequest, res: Response) => {
-  try {
-    const postId = req.params.id;
-    const userId = req.id;
-    const post = await Post.findById(postId);
-    if (!post) {
-      return res.status(400).json({ message: "post does not exists" });
-    }
-    const dislikePost = await post.updateOne({ $pull: { likes: userId } });
-    await post.save();
-    const removePostIdInUserLike = await User.findByIdAndUpdate(
-      userId,
-      { $pull: { likes: post._id } }, // $pull remove specific value
-      { new: true }
-    );
-    if (!dislikePost || !removePostIdInUserLike) {
-      return res.status(400).json({ message: "Some error to Like this Post" });
-    }
-    return res
-      .status(200)
-      .json({ message: "succes to like post", data: removePostIdInUserLike });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error", error });
   }
 };

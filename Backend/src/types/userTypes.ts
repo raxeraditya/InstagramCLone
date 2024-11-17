@@ -24,6 +24,6 @@ export interface passwordValidation {
 
 export interface tokenType {
   username: string;
-  userid: mongoose.Schema.Types.ObjectId;
+  userid: mongoose.Types.ObjectId;
   email: string;
 }
