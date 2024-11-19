@@ -1,6 +1,6 @@
 const Logo = () => {
   return (
-    <div className="flex py-5 px-3 my-0 lg:my-3 lg:gap-4 lg:py-2 lg:pl-3 lg:rounded-md items-center hover:bg-gray-700 cursor-pointer">
+    <div className="flex py-5 px-3 my-0 lg:my-3 lg:gap-4 lg:py-2 lg:pl-3 lg:rounded-md items-center cursor-pointer">
       <div className="block lg:hidden">
         <img src={"/instaicon.jfif"} className="w-9" />
       </div>

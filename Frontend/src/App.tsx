@@ -1,16 +1,20 @@
+import { ChatPage } from "./components/ChatPage";
 import Layout from "./components/Layout";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+    },
+    {
+      path: "/chat",
+      element: <ChatPage />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;

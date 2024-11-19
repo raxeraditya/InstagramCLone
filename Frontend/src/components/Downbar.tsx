@@ -7,7 +7,7 @@ import Create from "./sidebar/Create";
 const Downbar = () => {
   return (
     <div>
-      <div className="flex flex-row justify-between border-t border-red-200 bg-black w-screen h-12">
+      <div className="flex flex-row justify-between border-t border-red-200 bg-black w-screen h-12 z-30 text-white">
         <Home />
         <Explore />
         <Reels />

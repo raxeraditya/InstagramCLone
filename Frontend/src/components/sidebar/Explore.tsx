@@ -8,7 +8,7 @@ const Explore = () => {
         <MdExplore size={25} className="" />
       </div>
       <Link to={"/"} className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block">
-        Home
+        Explore
       </Link>
     </div>
   );

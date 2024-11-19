@@ -6,15 +6,17 @@ import RightSidebar from "./RightSidebar";
 const Layout = () => {
   return (
     <div className="w-full h-full">
-      <div className="flex bg-black text-white w-full h-full sm:gap-[5rem] gap-5">
-        <nav className="hidden sm:block sm:sticky sm:top-0 border-r border-gray-300 h-screen w-1/12 lg:w-1/4 xl:w-1/4">
+      <div className="downbar fixed bottom-0 sm:hidden">
+        <Downbar />
+      </div>
+      <div className="flex justify-between bg-black text-white">
+        <nav className="hidden w-[10%] sm:w-[8%] h-screen lg:w-[20%] sm:block sm:sticky sm:top-0 border-r">
           <LeftSidebar />
         </nav>
-        <div className="downbar fixed bottom-0 sm:hidden">
-          <Downbar />
-        </div>
-        <div className="containt mx-10 sm:mx-0 w-10/12 flex justify-between gap-[5rem]">
+        <div className="flex w-[100%] sm:w-[92%] lg:w-[60%] justify-center">
           <Center />
+        </div>
+        <div className="hidden w-[10%] lg:w-[20%] h-screen sm:top-0 lg:block md:sticky border-l">
           <RightSidebar />
         </div>
       </div>

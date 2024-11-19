@@ -1,5 +1,6 @@
 import { Response } from "express";
 import User from "../models/UserModel.js"; // Assuming you have a User model
+import fs from "fs";
 import {
   userLoginZodValidation,
   userZodValidation,
@@ -13,6 +14,11 @@ import {
 import { jenerateTokenSetCookie } from "../Utils/handleToken.js";
 import mongoose from "mongoose";
 import Post from "../models/PostModels.js";
+import {
+  deleteFromCloudinary,
+  getCloudinaryPublicId,
+  uploadOnCloudinary,
+} from "../lib/cloudinaryConfig.js";
 
 // Create a new user
 export const createUser = async (req: AuthRequest, res: Response) => {
@@ -142,5 +148,39 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server Error", error: err });
+  }
+};
+
+export const updateAvatar = async (req: AuthRequest, res: Response) => {
+  try {
+    const avatarLocal = req.file?.path;
+    const avatarLocalPath = String(avatarLocal);
+    const userId = "6739964599cbb32f0a4181c9";
+    if (!avatarLocalPath) {
+      fs.unlinkSync(avatarLocalPath);
+      return res.status(404).json({ message: "file not found" });
+    }
+
+    //TODO: delete old image - assignment
+    const user = await User.findById(userId);
+    if (!user) {
+      fs.unlinkSync(avatarLocalPath);
+      return res.status(404).json({ message: "User not found." });
+    }
+    if (user.avatar && user.avatar !== "default-avatar.png") {
+      const publicId = getCloudinaryPublicId(user.avatar);
+      await deleteFromCloudinary(publicId);
+    }
+    const avatarUrlUser = await uploadOnCloudinary(avatarLocalPath);
+    if (!avatarUrlUser) {
+      fs.unlinkSync(avatarLocalPath);
+      return res.status(404).json({ message: "avatarUrl not create" });
+    }
+    const avatarUrl = String(avatarUrlUser);
+    user.avatar = avatarUrl;
+    await user.save();
+    return res.status(200).json({ message: "succes", data: avatarUrl });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error });
   }
 };

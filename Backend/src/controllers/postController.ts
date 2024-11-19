@@ -4,7 +4,8 @@ import Comment from "../models/CommentModel.js";
 import Post from "../models/PostModels.js";
 import { AuthRequest } from "../types/postTypes.js";
 import User from "../models/UserModel.js";
-
+import fs from "fs";
+import { uploadOnCloudinary } from "../lib/cloudinaryConfig.js";
 export const addComment = async (req: AuthRequest, res: Response) => {
   try {
     const postId = req.params.id;
@@ -38,13 +39,22 @@ export const addComment = async (req: AuthRequest, res: Response) => {
 export const addPost = async (req: AuthRequest, res: Response) => {
   try {
     const body = await req.body;
+    const localFilePath = req.file?.path;
+    const localFile = String(localFilePath);
     const { caption } = body;
-    if (!caption) {
+    if (!caption || !localFile) {
+      fs.unlinkSync(localFile);
       return res.status(400).json({ message: "please fill sufficient data" });
+    }
+    const avatarUrl = await uploadOnCloudinary(localFile);
+    if (!avatarUrl) {
+      fs.unlinkSync(localFile);
+      return res.status(404).json({ message: "avatarUrl not create" });
     }
     const post = await Post.create({
       author: req.id,
       caption: caption,
+      imageUrl: avatarUrl,
     });
     return res
       .status(200)

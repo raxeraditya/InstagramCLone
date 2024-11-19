@@ -9,7 +9,7 @@ const Create = () => {
         <CiSquarePlus size={25} className="" />
       </div>
       <Link to={"/"} className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block">
-        Home
+        Create
       </Link>
     </div>
   );

@@ -10,7 +10,7 @@ import Search from "./sidebar/Search";
 
 const LeftSidebar = () => {
   return (
-    <div className="flex flex-col items-center justify-between h-full pt-2 pb-5 lg:px-4 lg:w-[80%]">
+    <div className="flex flex-col h-screen items-center justify-between">
       <div>
         <Logo />
         <Home />
@@ -21,7 +21,7 @@ const LeftSidebar = () => {
         <Notifications />
         <Profile />
       </div>
-      <div>
+      <div className="mb-6 mr-5">
         <More />
       </div>
     </div>

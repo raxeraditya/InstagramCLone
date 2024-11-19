@@ -7,8 +7,11 @@ const Messages = () => {
       <div className="md:pl-2 lg:pl-0">
         <RiMessage2Fill size={25} className="" />
       </div>
-      <Link to={"/"} className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block">
-        Home
+      <Link
+        to={"/chat"}
+        className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block"
+      >
+        Messages
       </Link>
     </div>
   );

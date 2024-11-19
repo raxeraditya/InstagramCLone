@@ -1,8 +1,8 @@
 const RightSidebar = () => {
   return (
-    <div className="w-0 sm:w-[40%] hidden sm:block">
+    <div className=" hidden sm:block">
       <div className="bg-yellow-500 w-full">
-        <h2 className="font-bold text-lg text-right">Right Sidebar</h2>
+        <h2 className="font-bold text-lg text-right">Right Sidebar he ye</h2>
         <ul>
           <li className="mb-2">Suggestions</li>
           <li className="mb-2">Trending</li>
