@@ -155,7 +155,7 @@ export const updateAvatar = async (req: AuthRequest, res: Response) => {
   try {
     const avatarLocal = req.file?.path;
     const avatarLocalPath = String(avatarLocal);
-    const userId = "6739964599cbb32f0a4181c9";
+    const userId = req.id;
     if (!avatarLocalPath) {
       fs.unlinkSync(avatarLocalPath);
       return res.status(404).json({ message: "file not found" });
