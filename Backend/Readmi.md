@@ -12,6 +12,9 @@
 PORT=3000
 JWT_SECRET=mysecret
 MONGO_URI=mongodb://0.0.0.0:27017/InstagramClone
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
 
 If a user already liked the post, their ID gets removed ($pull)
 If a user hasn't liked the post, their ID gets added ($addToSet)
