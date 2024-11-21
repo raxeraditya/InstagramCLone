@@ -7,8 +7,15 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  overflow-x: hidden;
+  background-color: black;
+  color: white;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in webkit browsers */
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Hides scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+}

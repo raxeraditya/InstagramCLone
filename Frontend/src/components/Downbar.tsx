@@ -1,19 +1,19 @@
-import Explore from "./sidebar/Explore";
-import { Home } from "./sidebar/Home";
-import Profile from "./sidebar/Profile";
-import Reels from "./sidebar/Reels";
-import Arrow from "./sidebar/Arrow";
-import Create from "./sidebar/Create";
-const Downbar = () => {
+import Explore from "./Sidebar/Explore";
+import { Home } from "./Sidebar/Home";
+import Profile from "./Sidebar/Profile";
+import Reels from "./Sidebar/Reels";
+import Arrow from "./Sidebar/Arrow";
+import Create from "./Sidebar/Create";
+const Downbar = ({ showText }: { showText: boolean }) => {
   return (
     <div>
       <div className="flex flex-row justify-between border-t border-red-200 bg-black w-screen h-12 z-30 text-white">
-        <Home />
-        <Explore />
-        <Reels />
-        <Create />
-        <Arrow />
-        <Profile />
+        <Home showText={showText} />
+        <Explore showText={showText} />
+        <Reels showText={showText} />
+        <Create showText={showText} />
+        <Arrow showText={showText} />
+        <Profile showText={showText} />
       </div>
     </div>
   );

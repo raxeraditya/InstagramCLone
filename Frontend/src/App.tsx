@@ -1,6 +1,7 @@
-import { ChatPage } from "./components/ChatPage";
 import Layout from "./components/Layout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ChatLayout from "./components/Chat/ChatLayout";
+import ChatMobile from "./components/Chat/ChatMobile";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -8,9 +9,14 @@ const App = () => {
       path: "/",
       element: <Layout />,
     },
+
     {
-      path: "/chat",
-      element: <ChatPage />,
+      path: "/direct/inbox",
+      element: <ChatLayout />,
+    },
+    {
+      path: "/direct/inbox/t/:id",
+      element: <ChatMobile />,
     },
   ]);
 

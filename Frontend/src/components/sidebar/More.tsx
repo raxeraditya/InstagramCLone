@@ -1,13 +1,19 @@
-import { IoReorderThreeOutline } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
+
 import { Link } from "react-router-dom";
 
-const More = () => {
+const More = ({ showText }: { showText: boolean }) => {
   return (
-    <div className="flex lg:rounded-md items-center hover:bg-gray-700 cursor-pointer py-3 px-4">
-      <div className="">
-        <IoReorderThreeOutline size={25} className="pr-3 w-full" />
+    <div className="flex py-5 px-3 my-0 lg:my-3 lg:gap-4 lg:py-2 lg:pl-3 lg:pr-10 lg:rounded-md items-center hover:bg-gray-700 cursor-pointer">
+      <div>
+        <GiHamburgerMenu size={25} className="" />
       </div>
-      <Link to={"/"} className="font-semibold lg:pr-5 xl:pr-14 hidden lg:block">
+      <Link
+        to={"/chat"}
+        className={`${
+          showText ? "font-semibold lg:pr-5 xl:pr-14 hidden lg:block" : "hidden"
+        }`}
+      >
         More
       </Link>
     </div>
